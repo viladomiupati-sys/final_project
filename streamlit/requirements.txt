@@ -1,0 +1,8 @@
+streamlit>=1.20
+pandas>=1.5
+numpy>=1.24
+pydeck>=0.8
+joblib
+scikit-learn>=1.0
+xgboost  # required if you want the model to run locally or re-train inside the app
+requests
