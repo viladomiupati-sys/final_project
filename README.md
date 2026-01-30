@@ -96,7 +96,13 @@ Visualizations include:
 - Route maps
 - Calendar heatmaps
 
-These analyses highlight temporal patterns, seasonal effects, and operational bottlenecks.
+**Conclusions:** 
+- The majority of flights are On-Time, so this will cause an Imbalance in our Machine Learnig models.
+- The likelihood of flight delays increases as departure times move later into the day.
+- Summer presents the highest volume of delayed flights, with delays occurring most frequently on Mondays, Thursdays, and Sundays, highlighting clear seasonal and weekly patterns.
+- North Central West Virginia Airport records the highest average delays, with PSA Airlines Inc. identified as the airline most associated with delayed flights.
+- The route with the highest probability to get delayed is from Roanoke-Blacksburg Airport to Orlando Sanford International Airport. The top four routes with the highest probability of delay are all scheduled to arrive in Orlando, highlighting Orlando as a key destination associated with increased delay risk.
+- These analyses highlight temporal patterns, seasonal effects, and operational bottlenecks.
 
 ---
 
@@ -121,11 +127,6 @@ A unified pipeline was used for all models:
 - Categorical features → OneHotEncoder
 - Models trained on top of the same preprocessing logic
 
-Class imbalance was addressed using:
-- Oversampling
-- Undersampling
-- SMOTE (where applicable)
-
 ---
 
 ### 🧠 Models Trained
@@ -144,6 +145,18 @@ Each model was evaluated using:
 - F1-score
 - Confusion Matrix
 
+Later on, class imbalance was addressed using:
+- Oversampling
+- Undersampling
+- SMOTE
+
+Also used Hyperparameter Tuning, optimize model hypernaeters to maximize recall on imbalanced dataset. The methods I used:
+- Grid Search: recall of 67%
+- Cross-Validation: recall of 69,49%
+- Bayesian Optimization: recall of 74,8%
+
+Conclusion: Hyperparameter tuning did not improve recall over the simple undersampling approach.
+
 ---
 
 ## 📈 Model Comparison
@@ -160,25 +173,32 @@ Key findings:
 XGBoost was selected as the final model due to superior performance in detecting delayed flights.
 
 ---
+## ✈️ Flight Delay Prediction WEB
+All of this work led to the creation of a Flight Delay Prediction Web tool. The interface allows users to check if their specific flight is likely to be on time or delayed based on the real-world patterns we've identified. 
+Link: http://192.168.68.103:8501 
+
 
 ## ✅ Key Conclusions
 
 - Flight delays show strong dependency on seasonality, time of day, and specific routes.
-- The dataset is significantly imbalanced, making recall a critical metric.
-- Tree-based and boosting models outperform linear models for this task.
 - XGBoost provides the best operational value for proactive delay detection.
 
 ---
+## Real-World Application
+
+In a real airline environment, this model could be integrated into scheduling and operations systems to:
+
+- Identify flights with high delay risk before departure
+- Optimize crew and aircraft allocation
+- Improve gate management and turnaround planning
+- Provide proactive passenger notifications
+
 
 ## 🚀 Future Improvements
 
 Potential next steps:
 
-- Hyperparameter tuning via cross-validation
-- Threshold optimization for business-specific tradeoffs
-- SHAP values for model explainability
-- Incorporation of weather data
-- Time-series modeling
-- Deployment as an API or dashboard integration
+- Incorporate real-time weather data
+- Perform deeper hyperparameter optimization
 
 
